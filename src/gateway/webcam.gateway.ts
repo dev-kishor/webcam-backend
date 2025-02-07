@@ -22,6 +22,7 @@ export class WebCamGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @SubscribeMessage('joinRoom')
   handleJoinRoom(client: Socket, { roomId }: any) {
     client.join(roomId);
+    this.server.to(roomId).emit('requestOffer');
     console.log({ action: 'Joined room', roomId });
   }
 
